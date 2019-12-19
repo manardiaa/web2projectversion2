@@ -1,0 +1,269 @@
+<html>
+<head>
+</head>
+<style>
+.pp{
+font-size:40
+}
+
+</style>
+<body>
+<p class="pp">
+Learing English Letters </P>
+numbers of letters : <input type= "text" class="in"> 
+<button     class ="bu">generate</button>
+<br>
+<div class="d">
+
+
+</div>
+<p id="demo"></p>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.Js"></script>
+<script>
+
+      function events(type,target,time){
+	  this.type=type;
+	  this.target=target;
+	  this.time=time;
+	  }
+	  var item ,tt;
+	  var e=new Array();
+	  
+	 function stored(event){
+	 e.push(new events(event.type,event.target,new Date()));
+	 item=[event.type,event.target.textContent,new Date().toString()];
+	 localStorage.setItem(event.target.textContent, JSON.stringify(item));
+	 tt=JSON.parse(localStorage.getItem(event.target.textContent));
+	 console.log(tt);
+	 
+	 
+	 }
+  window.addEventListener('load', stored);
+      
+      window.addEventListener('unload', stored);
+$(function(){
+const interval = setInterval(function() {
+   
+
+ $.ajax({
+        "type": "POST",
+        "url": "p.php",
+        "data":  {"events":json.stringify(localStorage)},
+		"success":function(data,status)
+{console.log(data);
+console.log(status);
+
+    },
+	"error":function(xhr,status){
+	console.log(xhr);
+console.log(status);
+
+    }
+	});
+ }, 5000);
+clearInterval(interval);
+localStorage.clear();
+
+
+/*
+$.ajax({
+ "type": "GET",
+        "url": "p.php",
+        "data":  {"events":""},
+		"error":function(response)
+{if(response){
+var ss=JSON.parse(response);
+console.log(ss);
+}}});
+*/
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+ /*$.ajax({
+"type":"post",
+"url":"database.sql",
+"data":{"object":"json.stringify(e)};
+"succes":function(response)
+{console.log(response);
+console.log( type.response);
+var o=json.parse(response);
+console.log(o);
+console.log(type of o);
+}});*/
+ /* $.ajax({
+        type: "POST",
+        url: "database.sql",
+        data:  {"object":"json.stringify(e)"},
+		error:function(response)
+{console.log(response);
+console.log( type.response);
+var o=json.parse(response);
+console.log(o);
+console.log(typeof o); 
+        }
+    });*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var letter=["A" ,"B", "C", "D", "E", "F", "G", "H", "I", "J" ,"K"," L"," M", "N", "O"," P"," Q"," R"," S"," T"," U"," V"," W"," X"," Y", "Z"];
+var imgArray = new Array();
+
+
+imgArray[0] = 'a.jpg';
+
+imgArray[1] = 'b.jpg';
+
+imgArray[2] = 'c.jpg';
+
+imgArray[3] = 'd.jpg';
+
+imgArray[4]= 'e.jpg';
+
+imgArray[5] = 'f.jpg';
+
+imgArray[6] = 'g.jpg';
+
+imgArray[7]= 'h.jpg';
+
+imgArray[8] = 'i.jpg';
+
+imgArray[9] = 'j.jpg';
+
+imgArray[10]= 'k.jpg';
+
+imgArray[11] = 'l.jpg';
+
+imgArray[12]= 'm.jpg';
+
+imgArray[13] = 'n.jpg';
+
+imgArray[14]= 'o.jpg';
+
+imgArray[15]= 'p.jpg';
+
+imgArray[16]= 'q.jpg';
+
+imgArray[17] = 'r.jpg';
+
+imgArray[18] = 's.jpg';
+
+imgArray[19] = 't.jpg';
+
+imgArray[20] = 'u.jpg';
+
+imgArray[21] = 'v.jpg';
+
+imgArray[22] = 'w.jpg';
+
+imgArray[23] = 'x.jpg';
+
+imgArray[24] = 'y.jpg';
+
+imgArray[25] = 'z.jpg';
+
+var b=document.getElementsByClassName("bu")[0];
+b.addEventListener("click",fun);
+b.addEventListener("click",stored);
+function fun(){
+
+var n=document.getElementsByClassName("in")[0].value;
+var num=parseInt(n);
+if(num >26 || num <1){
+alert("please enter number in the rang 1to 26");
+
+}
+else{
+var nn= new Array();
+for(var i=0;i<num;i++)
+{
+   nn[i]=Math.floor((Math.random() * 25) + 0);
+ }
+for(var i=0;i<nn.length;i++){
+ for(var b=0;b<letter.length;b++){
+if(nn[i]==b){
+ var btn = document.createElement("BUTTON");
+  btn.innerHTML = letter[b];
+  document.body.appendChild(btn);
+  btn.addEventListener("click",stored);
+  btn.setAttribute("class", "c");
+  }}}
+ 
+ var n="";
+ var a =document.getElementsByClassName("c");
+ for(var z=0;z<a.length;z++){
+ a[z].addEventListener("click",function(e){
+  var h=e.target.textContent;
+   for(var bb=0;bb<letter.length;bb++){
+   if(h==letter[bb]){
+   n=bb;
+   break;}
+   }var c="";
+   for(var asd=0;asd<imgArray.length;asd++){
+   if(n==asd){
+   c=asd;
+   break;
+   }
+   }
+   
+   var mg=document.createElement("IMG");
+   mg.setAttribute("src",imgArray[asd]);
+   // window.open(imgArray[asd]); //if you want diaplay image in anther page.
+   
+   document.body.appendChild(mg); //if you want display image in the same page
+ 
+   
+   });}
+ }
+ 
+}
+ 
+
+
+
+
+
+
+
+
+
+</script>
+</html>
